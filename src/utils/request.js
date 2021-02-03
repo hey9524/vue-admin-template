@@ -76,14 +76,15 @@ service.interceptors.response.use(
       })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 508 || res.code === 512 || res.code === 500) {
+      if (res.code === 401 || res.code === 512 || res.code === 500) {
         // to re-login
         Message({
           message: '您已经登出, 请重新登录',
           type: 'warning',
           duration: 3 * 1000
         })
-  
+
+        removeToken()
         let timer = setTimeout(() => {
           Route.replace('/login')
           clearTimeout(timer)
@@ -98,7 +99,7 @@ service.interceptors.response.use(
   error => {
     load.close()
     console.log('err----' + error) // for debug
-    removeToken('Token')
+    removeToken()
     Route.replace('/login')
 
     // Message({

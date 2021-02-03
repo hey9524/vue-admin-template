@@ -1,24 +1,17 @@
+/*
+ * @Author: Hey
+ * @Date: 2021-02-02 14:59:09
+ * @LastEditTime: 2021-02-02 16:17:11
+ * @LastEditors: Hey
+ * @Description: 
+ * @FilePath: \vue-admin-template\src\api\user.js
+ */
 import request from '@/utils/request'
 
-export function login(data) {
+export function login(params) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: '/api/login/admin',
     method: 'post',
-    data
-  })
-}
-
-export function getInfo(token) {
-  return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
-  })
-}
-
-export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
+    params
   })
 }

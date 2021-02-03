@@ -1,3 +1,11 @@
+/*
+ * @Author: Hey
+ * @Date: 2021-02-02 14:59:09
+ * @LastEditTime: 2021-02-02 16:03:08
+ * @LastEditors: Hey
+ * @Description: 
+ * @FilePath: \vue-admin-template\src\permission.js
+ */
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'

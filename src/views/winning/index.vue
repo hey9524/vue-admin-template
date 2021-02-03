@@ -1,7 +1,7 @@
 <!--
  * @Author: Hey
  * @Date: 2021-02-02 14:59:09
- * @LastEditTime: 2021-02-03 11:55:24
+ * @LastEditTime: 2021-02-03 20:33:57
  * @LastEditors: Hey
  * @Description: 
  * @FilePath: \vue-admin-template\src\views\winning\index.vue
@@ -19,7 +19,7 @@
       <el-table-column type="selection" width="55">
       </el-table-column>
 
-      <el-table-column v-for="(item, i) in tableHeader" :key="i" :label="item.label" :prop="item.props">
+      <el-table-column v-for="(item, i) in winTableHeader" :key="i" :label="item.label" :prop="item.props">
         <template slot-scope="props">
 
           <div v-if="item.props === 'state'">{{props.row[item.props] == 1 ? '显示' : '删除'}}</div>
@@ -42,7 +42,7 @@
     getWinningList
   } from '@/api'
   import TablePagination from '@/components/TablePagination'
-  import {tableHeader} from '@/utils/header' 
+  import {winTableHeader} from '@/utils/header' 
   export default {
     name: 'Winning',
     components: {
@@ -51,7 +51,7 @@
     data() {
       return {
         tableData: [],
-        tableHeader,
+        winTableHeader,
         multipleSelection: [],
         page: {
           pageIndex: 1,

@@ -1,7 +1,7 @@
 <!--
  * @Author: Hey
  * @Date: 2021-02-02 14:59:09
- * @LastEditTime: 2021-02-03 11:58:17
+ * @LastEditTime: 2021-02-03 21:10:31
  * @LastEditors: Hey
  * @Description: 
  * @FilePath: \vue-admin-template\src\views\dashboard\index.vue
@@ -70,18 +70,18 @@
         if (multipleSelection.length < 1) return this.$message.warning('请勾选需要修改的评论')
         if (multipleSelection.length > 1) return this.$message.warning('请勾选一条数据进行修改')
 
-        // this.$alert('确认修改?', '改为弹幕', {
-        //   confirmButtonText: '确定',
-        //   cancelButtonText: '取消',
-        // }).then(async action => {
-        const {
-          success
-        } = await changeBulletChat(multipleSelection[0].id)
-        if (success) {
-          this.$message.success('修改成功')
-          this.init()
-        }
-        // })
+        this.$alert('确认修改?', '改为弹幕', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(async action => {
+          const {
+            success
+          } = await changeBulletChat(multipleSelection[0].id)
+          if (success) {
+            this.$message.success('修改成功')
+            this.init()
+          }
+        })
       },
       handleSizeChange(val) {
         this.page.pageSize = val

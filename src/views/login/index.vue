@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
+    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on"
       label-position="left">
 
       <div class="title-container">
@@ -40,41 +40,17 @@
   import {
     login
   } from '@/api'
-  import {setToken} from '@/utils/auth'
+  import {
+    setToken
+  } from '@/utils/auth'
 
   export default {
     name: 'Login',
     data() {
-      const validateUsername = (rule, value, callback) => {
-        if (!validUsername(value)) {
-          callback(new Error('请输入用户名'))
-        } else {
-          callback()
-        }
-      }
-      const validatepasswd = (rule, value, callback) => {
-        if (value.length < 1) {
-          callback(new Error('请输入密码'))
-        } else {
-          callback()
-        }
-      }
       return {
         loginForm: {
           username: '',
           passwd: ''
-        },
-        loginRules: {
-          username: [{
-            required: true,
-            trigger: 'blur',
-            validator: validateUsername
-          }],
-          passwd: [{
-            required: true,
-            trigger: 'blur',
-            validator: validatepasswd
-          }]
         },
         passwdType: 'password',
         redirect: undefined
@@ -96,28 +72,21 @@
           this.$refs.passwd.focus()
         })
       },
-      handleLogin() {
-        this.$refs.loginForm.validate(async valid => {
-          if (valid) {
-            const {
-              msg,
-              success,
-              data
-            } = await login(this.loginForm)
-            if (success) {
-              this.$message.success('登陆成功')
-              setToken(data)
-              this.$router.push({
-                path: this.redirect || '/'
-              })
-            } else {
-              this.$message.warning(msg)
-            }
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
+      async handleLogin() {
+        const {
+          msg,
+          success,
+          data
+        } = await login(this.loginForm)
+        if (success) {
+          this.$message.success('登陆成功')
+          setToken(data)
+          this.$router.push({
+            path: this.redirect || '/'
+          })
+        } else {
+          this.$message.warning(msg)
+        }
       }
     }
   }

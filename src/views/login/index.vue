@@ -1,7 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on"
-      label-position="left">
+    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">Login Form</h3>
@@ -35,13 +34,11 @@
 
 <script>
   import {
-    validUsername
-  } from '@/utils/validate'
-  import {
     login
   } from '@/api'
   import {
-    setToken
+    setToken,
+    setStorage
   } from '@/utils/auth'
 
   export default {
@@ -81,6 +78,7 @@
         if (success) {
           this.$message.success('登陆成功')
           setToken(data)
+          setStorage('userName', this.loginForm.username)
           this.$router.push({
             path: this.redirect || '/'
           })
